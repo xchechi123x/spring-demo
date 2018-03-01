@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="common">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+
+        <Property name="query">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+        </Property>
+
+        <Property name="debug">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="common" follow="true">
+            <PatternLayout pattern="${common}"/>
+        </Console>
+
+        <Console name="query" follow="true">
+            <PatternLayout pattern="${query}"/>
+        </Console>
+
+        <Console name="debug" follow="true">
+            <PatternLayout pattern="${debug}"/>
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="error">
+            <AppenderRef ref="common"/>
+        </Root>
+
+        <Logger name="com.example.demo.controller" additivity="false">
+            <AppenderRef ref="query"/>
+        </Logger>
+
+        <Logger name="com.example.demo.Interceptor" additivity="false">
+            <AppenderRef ref="debug"/>
+        </Logger>
+    </Loggers>
+</Configuration>
